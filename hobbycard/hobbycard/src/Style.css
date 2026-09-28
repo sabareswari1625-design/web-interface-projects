@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eef4f8;
+  color: #222;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+}
+
+.container h1 {
+  text-align: center;
+  color: #173f5f;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.intro {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.hobby-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.hobby-card {
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transition: 0.3s;
+}
+
+.hobby-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hobby-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.hobby-content {
+  padding: 20px;
+}
+
+.hobby-content h2 {
+  color: #173f5f;
+  margin-bottom: 10px;
+}
+
+.hobby-content p {
+  color: #666;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .hobby-container {
+    grid-template-columns: 1fr;
+  }
+}

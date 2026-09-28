@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile Card</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .profile {
+            margin-top: 20px;
+            border-top: 2px solid #ddd;
+            padding-top: 15px;
+            display: none;
+        }
+
+        .profile h3 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 15px;
+        }
+
+        .profile p {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Student Profile</h2>
+
+        <input type="text" id="name" placeholder="Enter Student Name">
+
+        <input type="text" id="regno" placeholder="Enter Register Number">
+
+        <input type="number" id="marks" placeholder="Enter Marks (0-100)">
+
+        <button onclick="displayProfile()">Display Profile</button>
+
+        <div class="profile" id="profile">
+
+            <h3>Profile Card</h3>
+
+            <p>
+                <b>Name :</b>
+                <span id="sname"></span>
+            </p>
+
+            <p>
+                <b>Register No :</b>
+                <span id="sreg"></span>
+            </p>
+
+            <p>
+                <b>Marks :</b>
+                <span id="smarks"></span>
+            </p>
+
+            <p>
+                <b>Grade :</b>
+                <span id="sgrade"></span>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function displayProfile() {
+
+            // Get values from input fields
+            let name = document.getElementById("name").value;
+            let reg = document.getElementById("regno").value;
+            let marks = parseInt(document.getElementById("marks").value);
+
+            let grade = "";
+
+            // Check marks
+            if (isNaN(marks) || marks < 0 || marks > 100) {
+                alert("Please enter marks between 0 and 100");
+                return;
+            }
+
+            // Calculate grade
+            if (marks >= 95) {
+                grade = "O";
+            }
+            else if (marks >= 90) {
+                grade = "A+";
+            }
+            else if (marks >= 80) {
+                grade = "A";
+            }
+            else if (marks >= 70) {
+                grade = "B+";
+            }
+            else if (marks >= 50) {
+                grade = "B";
+            }
+            else if (marks >= 25) {
+                grade = "C";
+            }
+            else {
+                grade = "F";
+            }
+
+            // Display values
+            document.getElementById("sname").textContent = name;
+            document.getElementById("sreg").textContent = reg;
+            document.getElementById("smarks").textContent = marks;
+            document.getElementById("sgrade").textContent = grade;
+
+            // Show profile
+            document.getElementById("profile").style.display = "block";
+        }
+
+    </script>
+
+</body>
+
+</html>
