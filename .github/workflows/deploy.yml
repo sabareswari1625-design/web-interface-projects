@@ -70,9 +70,9 @@ jobs:
 
       - name: Build Portfolio
         run: |
-          cd portfolioProject/portfolioProject
+          cd portfolioproject/portfolioproject
           npm install
-          npm run build -- --base=/web-interface-projects/portfolioProject/ --outDir=$GITHUB_WORKSPACE/_site/portfolioProject
+          npm run build -- --base=/web-interface-projects/portfolioproject/ --outDir=$GITHUB_WORKSPACE/_site/portfolioProject
 
       - name: Build Report Card
         run: |
