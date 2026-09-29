@@ -34,9 +34,9 @@ jobs:
           npm run build -- --base=/web-interface-projects/calculatorproject/ --outDir=$GITHUB_WORKSPACE/_site/calculatorproject
 
       - name: Copy Counter App
-        run: |
-          mkdir -p _site/counterapp
-          cp -R counterapp/. _site/counterapp/
+  run: |
+   mkdir -p _site/counterapp
+    cp counterapp/counter.html _site/counterapp/index.html
 
       - name: Build Form Validation
         run: |
