@@ -10,34 +10,16 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Create website folder
+      - name: Create site folder
         run: mkdir -p _site
-
-      - name: Copy main website
-        run: |
-          cp index.html _site/
-          cp style.css _site/
 
       - name: Build Attendance Tracker
         run: |
@@ -51,10 +33,10 @@ jobs:
           npm install
           npm run build -- --base=/web-interface-projects/calculatorproject/ --outDir=$GITHUB_WORKSPACE/_site/calculatorproject
 
-      - name: Build Counter App
+      - name: Copy Counter App
         run: |
           mkdir -p _site/counterapp
-          cp -r counterapp/* _site/counterapp/
+          cp -R counterapp/. _site/counterapp/
 
       - name: Build Form Validation
         run: |
@@ -70,9 +52,9 @@ jobs:
 
       - name: Build Portfolio
         run: |
-          cd portfolioproject/portfolioproject
+          cd portfolioProject/portfolioProject
           npm install
-          npm run build -- --base=/web-interface-projects/portfolioproject/ --outDir=$GITHUB_WORKSPACE/_site/portfolioProject
+          npm run build -- --base=/web-interface-projects/portfolioProject/ --outDir=$GITHUB_WORKSPACE/_site/portfolioProject
 
       - name: Build Report Card
         run: |
@@ -89,13 +71,18 @@ jobs:
       - name: Copy Student Dashboard
         run: |
           mkdir -p _site/studentdashboard
-          cp -r studentdashboard/* _site/studentdashboard/
+          cp -R studentdashboard/. _site/studentdashboard/
 
       - name: Build Todo App
         run: |
           cd todoapp/todoapp
           npm install
           npm run build -- --base=/web-interface-projects/todoapp/ --outDir=$GITHUB_WORKSPACE/_site/todoapp
+
+      - name: Copy Root Website
+        run: |
+          cp index.html _site/index.html
+          cp style.css _site/style.css
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
