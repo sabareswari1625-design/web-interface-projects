@@ -60,14 +60,25 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/_site/hobbycard
           cp -R dist/* $GITHUB_WORKSPACE/_site/hobbycard/
 
-      # Portfolio
       - name: Build Portfolio
-        run: |
-          cd portfolioProject/portfolioProject
-          npm install
-          npm run build -- --base=/web-interface-projects/portfolioProject/portfolioProject/
-          mkdir -p $GITHUB_WORKSPACE/_site/portfolioProject/portfolioProject
-          cp -R dist/* $GITHUB_WORKSPACE/_site/portfolioProject/portfolioProject/
+  run: |
+    echo "Checking portfolio files..."
+    find . -maxdepth 4 -name package.json -print
+
+    if [ -f "portfolioProject/package.json" ]; then
+      cd portfolioProject
+    elif [ -f "portfolioProject/portfolioProject/package.json" ]; then
+      cd portfolioProject/portfolioProject
+    else
+      echo "Portfolio package.json not found"
+      exit 1
+    fi
+
+    npm install
+    npm run build
+
+    mkdir -p "$GITHUB_WORKSPACE/_site/portfolioProject"
+    cp -R dist/* "$GITHUB_WORKSPACE/_site/portfolioProject/"
 
       # Report Card
       - name: Build Report Card
