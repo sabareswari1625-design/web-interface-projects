@@ -44,29 +44,27 @@ jobs:
           mkdir -p _site/counterapp
           cp counterapp/counter.html _site/counterapp/index.html
 
-      # Form Validation
-      - name: Build Form Validation
-        run: |
-          cd formvalidation/formvalidation
-          npm install
-          npm run build -- --base=/web-interface-projects/formvalidation/ --outDir=$GITHUB_WORKSPACE/_site/formvalidation
-
       # Hobby Card
       - name: Build Hobby Card
         run: |
           cd hobbycard/hobbycard
           npm install
           npm run build -- --base=/web-interface-projects/hobbycard/ --outDir=$GITHUB_WORKSPACE/_site/hobbycard
+      - name: Build Form Validation
+        run: |
+          cd formvalidation/formvalidation
+          npm install
+          npm run build -- --base=/web-interface-projects/formvalidation/formvalidation/
+          mkdir -p $GITHUB_WORKSPACE/_site/formvalidation/formvalidation
+          cp -R dist/* $GITHUB_WORKSPACE/_site/formvalidation/formvalidation/
 
-      # Portfolio
-      # Source folder in GitHub: portfolioproject
-      # Published folder: portfolioProject
       - name: Build Portfolio
         run: |
-          cd portfolioproject/portfolioproject
+          cd portfolioProject/portfolioProject
           npm install
-          npm run build -- --base=/web-interface-projects/portfolioProject/ --outDir=$GITHUB_WORKSPACE/_site/portfolioProject
-
+          npm run build -- --base=/web-interface-projects/portfolioProject/portfolioProject/
+          mkdir -p $GITHUB_WORKSPACE/_site/portfolioProject/portfolioProject
+          cp -R dist/* $GITHUB_WORKSPACE/_site/portfolioProject/portfolioProject/
       # Report Card
       - name: Build Report Card
         run: |
