@@ -15,41 +15,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repository
       - name: Checkout
         uses: actions/checkout@v4
-
-      # Create deployment folder
-      - name: Create site folder
-        run: |
-          mkdir -p _site
 
       # Attendance Tracker
       - name: Build Attendance Tracker
         run: |
           cd Attendancetracker
           npm install
-          npm run build -- --base=/web-interface-projects/Attendancetracker/ --outDir=$GITHUB_WORKSPACE/_site/Attendancetracker
+          npm run build -- --base=/web-interface-projects/Attendancetracker/
+          mkdir -p $GITHUB_WORKSPACE/_site/Attendancetracker
+          cp -R dist/* $GITHUB_WORKSPACE/_site/Attendancetracker/
 
       # Calculator
       - name: Build Calculator
         run: |
           cd calculatorproject
           npm install
-          npm run build -- --base=/web-interface-projects/calculatorproject/ --outDir=$GITHUB_WORKSPACE/_site/calculatorproject
+          npm run build -- --base=/web-interface-projects/calculatorproject/
+          mkdir -p $GITHUB_WORKSPACE/_site/calculatorproject
+          cp -R dist/* $GITHUB_WORKSPACE/_site/calculatorproject/
 
-      # Counter App - Static HTML
+      # Counter App
       - name: Copy Counter App
         run: |
-          mkdir -p _site/counterapp
-          cp counterapp/counter.html _site/counterapp/index.html
+          mkdir -p $GITHUB_WORKSPACE/_site/counterapp
+          cp counterapp/counter.html $GITHUB_WORKSPACE/_site/counterapp/index.html
 
-      # Hobby Card
-      - name: Build Hobby Card
-        run: |
-          cd hobbycard/hobbycard
-          npm install
-          npm run build -- --base=/web-interface-projects/hobbycard/ --outDir=$GITHUB_WORKSPACE/_site/hobbycard
+      # Form Validation
       - name: Build Form Validation
         run: |
           cd formvalidation/formvalidation
@@ -58,6 +51,16 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/_site/formvalidation/formvalidation
           cp -R dist/* $GITHUB_WORKSPACE/_site/formvalidation/formvalidation/
 
+      # Hobby Card
+      - name: Build Hobby Card
+        run: |
+          cd hobbycard/hobbycard
+          npm install
+          npm run build -- --base=/web-interface-projects/hobbycard/
+          mkdir -p $GITHUB_WORKSPACE/_site/hobbycard
+          cp -R dist/* $GITHUB_WORKSPACE/_site/hobbycard/
+
+      # Portfolio
       - name: Build Portfolio
         run: |
           cd portfolioProject/portfolioProject
@@ -65,38 +68,48 @@ jobs:
           npm run build -- --base=/web-interface-projects/portfolioProject/portfolioProject/
           mkdir -p $GITHUB_WORKSPACE/_site/portfolioProject/portfolioProject
           cp -R dist/* $GITHUB_WORKSPACE/_site/portfolioProject/portfolioProject/
+
       # Report Card
       - name: Build Report Card
         run: |
           cd reportcard/reportcard
           npm install
-          npm run build -- --base=/web-interface-projects/reportcard/ --outDir=$GITHUB_WORKSPACE/_site/reportcard
+          npm run build -- --base=/web-interface-projects/reportcard/
+          mkdir -p $GITHUB_WORKSPACE/_site/reportcard
+          cp -R dist/* $GITHUB_WORKSPACE/_site/reportcard/
+
+      # Student Dashboard
+      - name: Build Student Dashboard
+        run: |
+          cd studentdashboard/studentdashboard
+          npm install
+          npm run build -- --base=/web-interface-projects/studentdashboard/
+          mkdir -p $GITHUB_WORKSPACE/_site/studentdashboard
+          cp -R dist/* $GITHUB_WORKSPACE/_site/studentdashboard/
 
       # Student Profile
       - name: Build Student Profile
         run: |
           cd studentprofile/studentprofile
           npm install
-          npm run build -- --base=/web-interface-projects/studentprofile/ --outDir=$GITHUB_WORKSPACE/_site/studentprofile
-
-      # Student Dashboard
-      - name: Copy Student Dashboard
-        run: |
-          mkdir -p _site/studentdashboard
-          cp -R studentdashboard/. _site/studentdashboard/
+          npm run build -- --base=/web-interface-projects/studentprofile/
+          mkdir -p $GITHUB_WORKSPACE/_site/studentprofile
+          cp -R dist/* $GITHUB_WORKSPACE/_site/studentprofile/
 
       # Todo App
       - name: Build Todo App
         run: |
           cd todoapp/todoapp
           npm install
-          npm run build -- --base=/web-interface-projects/todoapp/ --outDir=$GITHUB_WORKSPACE/_site/todoapp
+          npm run build -- --base=/web-interface-projects/todoapp/
+          mkdir -p $GITHUB_WORKSPACE/_site/todoapp
+          cp -R dist/* $GITHUB_WORKSPACE/_site/todoapp/
 
-      # Root landing page
+      # Root website
       - name: Copy Root Website
         run: |
-          cp index.html _site/index.html
-          cp style.css _site/style.css
+          cp index.html $GITHUB_WORKSPACE/_site/
+          cp style.css $GITHUB_WORKSPACE/_site/
 
       # GitHub Pages
       - name: Setup Pages
